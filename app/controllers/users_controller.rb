@@ -20,4 +20,9 @@ class UsersController < ApplicationController
     render json: User.create(params["user"])
   end
 
+  # PUT: edit route
+  def update
+    render json: User.update(params["id"], params["user"])
+  end
+
 end

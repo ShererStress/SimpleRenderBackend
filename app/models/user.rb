@@ -26,14 +26,21 @@ class User
       SQL
     );
 
-
-
     #POST: A new user
     DB.prepare("users_create",
       <<-SQL
         INSERT INTO users (username, password, mostrecentver)
         VALUES ($1, $2, 0)
         RETURNING id, username, password, mostrecentver;
+      SQL
+    );
+
+    #PUT: Edit an existing user
+    DB.prepare("users_update",
+      <<-SQL
+        UPDATE users
+        SET mostrecentver = $2
+        WHERE id = $1
       SQL
     );
 
@@ -72,6 +79,15 @@ class User
       result = DB.exec_prepared("users_create", [newUsername, newPassword]);
 
       return result.first
+    end
+
+    #PUT: Change a user's most recently downloaded version
+    def self.update(id, options)
+      newVersion = options["currentVersion"];
+
+      results = DB.exec_prepared("users_update", [id, newVersion]);
+
+      return results.first;
     end
 
 end #End user class
