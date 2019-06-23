@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 
   # GET: index route
+  def baseURL
+    render json: User.all
+  end
+
+  # GET: index route
   def index
     render json: User.all
   end

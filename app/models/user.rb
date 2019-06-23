@@ -1,11 +1,11 @@
 class User
 
   #Heroku
-  # uri = URI.parse(ENV['DATABASE_URL'])
-  # DB = PG.connect(uri.hostname, uri.port, nil, nil, uri.path[1..-1], uri.user, uri.password)
+  uri = URI.parse(ENV['DATABASE_URL'])
+  DB = PG.connect(uri.hostname, uri.port, nil, nil, uri.path[1..-1], uri.user, uri.password);
 
   #Local
-  DB = PG.connect(host: "localhost", port: 5432, dbname: 'simpleRenderBackend_development')
+  # DB = PG.connect(host: "localhost", port: 5432, dbname: 'simpleRenderBackend_development')
 
 
   #GET: A user by id
